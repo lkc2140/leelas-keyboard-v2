@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf‐8">
+  <title> Leela's Keyboard </title>
+  <!--SOURCE: https://www.codeguage.com/courses/js/cssom-colored-squares-exercise-->
+  <style> 
+    .square {
+    position: fixed;
+    opacity: 0.8;
+  }
+  </style>
+
+  <!--SOURCE: https://www.geeksforgeeks.org/how-to-show-and-hide-div-elements-using-radio-buttons/-->
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <style type="text/css">
+    .selectt {
+        padding: 0px;
+        display: none;
+        margin-top: 0px;
+    }
+      
+    label {
+        margin-right: 0px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Leela's Keyboard! (v2)</h1>
+  <p>Press keys to play.</p>
+
+  <!--SOURCE: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio-->
+  <fieldset style="margin: 5px;">
+    <legend>Select a waveform:</legend>
+    <div>
+      <label> <input type="radio" id="sine" name="wave" value="sine" checked /> Sine</label>
+      <label> <input type="radio" id="sawtooth" name="wave" value="sawtooth" /> Sawtooth</label>
+    </div>
+  </fieldset>
+
+  <fieldset style="margin: 5px;">
+    <legend>Select a mode:</legend>
+
+    <div>
+      <label>
+        <input type="radio" id="normal" name="mode" value="normal" checked />Normal</label>
+      <label>
+        <input type="radio" id="additive" name="mode" value="additive"/>Additive</label>
+      <label>
+        <input type="radio" id="am" name="mode" value="am" />AM</label>
+      <label>
+        <input type="radio" id="fm" name="mode" value="fm" />FM</label>
+    </div>
+
+    <div class="additive selectt">
+      <p>Number of Partial Frequencies:</p>
+      <input id="range0" type="range" min=1 max=10 name="numPartials" value="4" oninput="amount0.value=range0.value"></input>
+      <output id="amount0" name="amount0" for="range0">4</output>
+
+      <p>LFO Frequency:</p>
+      <input id="range1" type="range" min=0 max=20 name="LFO" value="5" oninput="amount1.value=range1.value"></input>
+      <output id="amount1" name="amount1" for="range1">5</output>
+    </div>
+
+    <div class="am selectt">
+      <p>Modulator Frequency:</p>
+      <input id="range2" type="range" min=0 max=1000 name="AM_Mod" value="30" oninput="amount2.value=range2.value"></input>
+      <output id="amount2" name="amount2" for="range2">30</output>
+    </div>
+
+    <div class="fm selectt">
+      <p>Modulator Frequency:</p>
+      <input id="range3" type="range" min=1 max=1000 name="FM_Mod" value="5" oninput="amount3.value=range3.value"></input>
+      <output id="amount3" name="amount3" for="range3">5</output>
+
+      <p>Modulation Index:</p>
+      <input id="range4" type="range" min=1 max=1000 name="Mod_Index" value="10" oninput="amount4.value=range4.value"></input>
+      <output id="amount4" name="amount4" for="range4">10</output>
+
+    </div>
+
+    <!--SOURCE: https://www.geeksforgeeks.org/how-to-show-and-hide-div-elements-using-radio-buttons/-->
+    <script type="text/javascript">
+      $(document).ready(function() {
+          $('input[type="radio"]').click(function() {
+              var inputValue = $(this).attr("value");
+              var targetBox = $("." + inputValue);
+              $(".selectt").not(targetBox).hide();
+              $(targetBox).show();
+          });
+      });
+    </script>
+    
+  </fieldset>
+
+  
+
+  <fieldset style="margin: 5px;">
+    <legend>Select a color palette:</legend>
+
+    <div>
+      <input type="radio" id="random" name="color" value="random" checked />
+      <label for="random">Random</label>
+    </div>
+
+    <div>
+      <input type="radio" id="gray" name="color" value="gray" />
+      <label for="gray">Grayscale</label>
+    </div>
+
+    <div>
+      <input type="radio" id="pastel" name="color" value="pastel" />
+      <label for="pastel">Pastels</label>
+    </div>
+
+  </fieldset>
+
+<!--SOURCE: https://www.marksantolucito.com/COMS3430/fall2023/wave_logger/-->
+  <div class="container">
+    <canvas id="globalVisualizer" width="150" height="85" style="margin:5px;border:1px solid #000000">
+      wave form visualizer
+    </canvas>
+  </div>
+
+  <button style="margin: 5px;">Clear</button>
+
+</body>
+<script src="main.js"> </script>
+
+
+
+</html>
